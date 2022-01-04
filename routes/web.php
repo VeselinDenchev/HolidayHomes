@@ -16,6 +16,11 @@ use App\Http\Controllers\ObjectTypeController;
 */
 
 Route::get('/', function () {
+    if (auth()->user())
+    {
+        if (auth()->user()->assignRole('admin'));
+    }
+
     return view('welcome');
 });
 
