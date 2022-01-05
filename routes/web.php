@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PopulatedPlaceController;
 use App\Http\Controllers\ObjectTypeController;
+use App\Http\Controllers\HousesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,11 @@ Route::post('/object_type',[ObjectTypeController::class, 'create']);
 Route::get('/object_type/{objectType}', [ObjectTypeController::class, 'edit']);
 Route::post('/object_type/{objectType}', [ObjectTypeController::class, 'update']);
 // Object types end
+
+// Houses start
+Route::get('/houses', [HousesController::class, 'index'])->name('houses');
+Route::get('/house',[HousesController::class, 'add']);
+Route::post('/house',[HousesController::class, 'create']);
+Route::get('/house/{house}', [HousesController::class, 'edit']);
+Route::post('/house/{house}', [HousesController::class, 'update']);
+// Houses end

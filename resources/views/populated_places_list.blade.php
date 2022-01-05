@@ -27,7 +27,7 @@
                     @foreach($places as $populatedPlace)
                         <tr class="border-b hover:bg-orange-100">
                             <td class="p-3 px-5">
-                                {{$populatedPlace->name}}
+                                {{$populatedPlace->populated_place_name}}
                             </td>
                             <td class="p-3 px-5">
                                 <a href="/populated_place/{{$populatedPlace->id}}" name="edit" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-black py-1 px-2 rounded focus:outline-none focus:shadow-outline">Edit</a>

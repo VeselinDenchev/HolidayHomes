@@ -21,6 +21,11 @@ class House extends Model
 
     public function owner()
     {
-        return $this->hasOne(Owner::class);
+        return $this->hasOne(User::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany('House', 'house_id');
     }
 }
