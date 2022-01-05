@@ -15,7 +15,7 @@ class CreateHousesTable extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('house_name');
             $table->integer('populated_place_id')->unsigned()->index();
             $table->integer('object_type_id')->unsigned()->index();
             $table->string('description')->nullable();

@@ -15,7 +15,7 @@ class CreatePopulatedPlacesTable extends Migration
     {
         Schema::create('populated_places', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('populated_place_name');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateObjectTypeTable extends Migration
     {
         Schema::create('object_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('object_type_name');
             $table->timestamps();
         });
     }
