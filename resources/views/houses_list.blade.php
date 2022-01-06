@@ -38,13 +38,12 @@
 <td class="p-3 px-5">
     {{$house->populated_place_name}}
 </td>
-        @foreach($house->url as $image)
-            {
-            <td class="p-3 px-5">
+{{--
+<td class="p-3 px-5">
                 <img src="{{$house->url}}">
-            </td>
-            }
-        @endforeach
+        </td>
+--}}
+
 
 <td class="p-3 px-5">
 
