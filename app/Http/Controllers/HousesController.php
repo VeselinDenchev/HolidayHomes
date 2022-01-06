@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\House;
+use App\Models\Image;
 use App\Models\ObjectType;
 use App\Models\PopulatedPlace;
 use Illuminate\Http\Request;
@@ -32,10 +33,11 @@ class HousesController extends Controller
         return view('add_house', compact('populatedPlaces', 'objectTypes'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request, Image $img)
     {
         $this->validate($request, [
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $house = new House();
         $house->house_name = $request->house_name;
@@ -48,9 +50,24 @@ class HousesController extends Controller
         $house->description = $request->description;
         $house->count_of_rooms = $request->count_of_rooms;
         $house->count_of_beds = $request->count_of_beds;
-        $house->user_id = 1;
+        $house->user_id = auth()->user()->id;
 
         $house->save();
+
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->image->move(public_path('images'), $imageName);
+
+        /* Store $imageName name in DATABASE from HERE */
+
+        $img = new Image();
+        //$img->description = $imageName;
+        $img->path = public_path('images') . DIRECTORY_SEPARATOR . $imageName;
+        $img->url = 'images' . DIRECTORY_SEPARATOR . $imageName;
+        $img->house_id = $house->id;
+
+        $img->save();
+
         return redirect('/houses');
     }
 
