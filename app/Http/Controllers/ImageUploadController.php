@@ -35,7 +35,7 @@ class ImageUploadController extends Controller
         /* Store $imageName name in DATABASE from HERE */
 
         $img = new Image();
-        $img->description = $imageName;
+        //$img->description = $imageName;
         $img->path = public_path('images') . DIRECTORY_SEPARATOR . $imageName;
         $img->url = 'images' . DIRECTORY_SEPARATOR . $imageName;
         $img->save();

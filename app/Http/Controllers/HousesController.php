@@ -13,10 +13,11 @@ class HousesController extends Controller
        $houses = DB::table('houses')
             ->join('populated_places', 'houses.populated_place_id', '=', 'populated_places.id')
             ->join('object_types', 'houses.object_type_id', '=', 'object_types.id')
-            /*->join('images', 'houses.id', '=', 'images.house_id')*/
+            ->join('images', 'houses.id', '=', 'images.house_id')
             ->select('houses.id', 'houses.house_name', 'populated_places.populated_place_name',
-                'object_types.object_type_name') //'images.path'*/
+                'object_types.object_type_name', 'images.url')
             ->get();
+       var_dump($houses);
 
         return view('houses_list', compact('houses'));
     }

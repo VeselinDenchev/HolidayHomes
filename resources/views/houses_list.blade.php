@@ -38,9 +38,14 @@
 <td class="p-3 px-5">
     {{$house->populated_place_name}}
 </td>
-<td class="p-3 px-5">
-    <img src="@$house->images->path">
-</td>
+        @foreach($house->url as $image)
+            {
+            <td class="p-3 px-5">
+                <img src="{{$house->url}}">
+            </td>
+            }
+        @endforeach
+
 <td class="p-3 px-5">
 
     <a href="/house/{{$house->id}}" name="edit" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-black py-1 px-2 rounded focus:outline-none focus:shadow-outline">Edit</a>
