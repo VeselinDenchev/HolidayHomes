@@ -20,8 +20,7 @@ use App\Http\Controllers\UserRoleController;
 Route::get('/', function () {
     if (auth()->user())
     {
-        auth()->user()->assignRole('editor')
-        ;
+        auth()->user()->assignRole('editor');
     }
 
     return view('welcome');
