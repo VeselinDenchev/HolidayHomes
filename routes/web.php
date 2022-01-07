@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PopulatedPlaceController;
 use App\Http\Controllers\ObjectTypeController;
 use App\Http\Controllers\HouseController;
+use App\Http\Controllers\UserRoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,8 @@ use App\Http\Controllers\HouseController;
 Route::get('/', function () {
     if (auth()->user())
     {
-        if (auth()->user()->assignRole('admin'));
+        auth()->user()->assignRole('editor')
+        ;
     }
 
     return view('welcome');
@@ -52,3 +54,9 @@ Route::post('/house',[HouseController::class, 'create']);
 Route::get('/house/{house}', [HouseController::class, 'edit']);
 Route::post('/house/{house}', [HouseController::class, 'update']);
 // Houses end
+
+// Roles start
+Route::get('/users', [UserRoleController::class, 'index'])->name('roles');
+Route::get('/user/{house}', [UserRoleController::class, 'edit']);
+Route::post('/user/{house}', [UserRoleController::class, 'update']);
+// Roles end

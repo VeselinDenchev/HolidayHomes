@@ -87,7 +87,12 @@ class HouseController extends Controller
         else
         {
             $this->validate($request, [
-                //'description' => 'required',
+                'house_name' => 'required',
+                'populated_place' => 'required',
+                'object_type' => 'required',
+                'description' => 'required',
+                'count_of_rooms' => 'numeric|min:1|max:30',
+                'count_of_beds' => 'numeric|min:1|max:50',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
@@ -131,7 +136,7 @@ class HouseController extends Controller
         $img->save();
     }
 
-    public function deleteImage($imageFileName)
+    private function deleteImage($imageFileName)
     {
         Storage::delete($imageFileName);
         $deletedImage = DB::table('images')
