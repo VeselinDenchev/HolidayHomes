@@ -5,22 +5,30 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('index') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-jet-nav-link href="{{ route('index') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Home') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('houses') }}" :active="request()->routeIs('populated_places')">
-                        {{ __('Houses') }}
+                    <x-jet-nav-link href="{{ route('all_houses') }}" :active="request()->routeIs('populated_places')">
+                        {{ __('All houses') }}
                     </x-jet-nav-link>
                 </div>
+                @role('editor')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('my_houses') }}" :active="request()->routeIs('populated_places')">
+                        {{ __('My houses') }}
+                    </x-jet-nav-link>
+                </div>
+                @endrole
+                @role('admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('populated_places') }}" :active="request()->routeIs('populated_places')">
                         {{ __('Populated places') }}
@@ -36,6 +44,7 @@
                         {{ __('Users') }}
                     </x-jet-nav-link>
                 </div>
+                @endrole
             </div>
             @if (Auth::user())
                 <div class="hidden sm:flex sm:items-center sm:ml-6">

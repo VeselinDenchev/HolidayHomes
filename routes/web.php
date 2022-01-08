@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/index', function () {
+   return view('index');
+})->name('index');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -42,11 +46,13 @@ Route::post('/object_type/{objectType}', [ObjectTypeController::class, 'update']
 // Object types end
 
 // Houses start
-Route::get('/houses', [HouseController::class, 'index'])->name('houses');
+Route::get('/my_houses', [HouseController::class, 'index'])->name('my_houses');
 Route::get('/house',[HouseController::class, 'add']);
 Route::post('/house',[HouseController::class, 'create']);
 Route::get('/house/{house}', [HouseController::class, 'edit']);
 Route::post('/house/{house}', [HouseController::class, 'update']);
+Route::get('/all_houses', [HouseController::class, 'allHouses'])->name('all_houses');
+Route::get('/details/house/{house}', [HouseController::class, 'details']);
 // Houses end
 
 // Roles start

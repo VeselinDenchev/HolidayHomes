@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('House') }}
+            {{ __('My houses') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -38,11 +38,6 @@
 <td class="p-3 px-5">
     {{$house->populated_place_name}}
 </td>
-{{--
-<td class="p-3 px-5">
-                <img src="{{$house->url}}">
-        </td>
---}}
 
 
 <td class="p-3 px-5">

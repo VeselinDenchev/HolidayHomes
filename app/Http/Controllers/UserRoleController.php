@@ -26,8 +26,6 @@ class UserRoleController extends Controller
                 ->select('roles.id', 'roles.name as roleName', 'model_has_roles.role_id')
                 ->get();
 
-        var_dump($user);
-
         return view('edit_user_role', compact('user', 'roles'));
     }
 
@@ -40,8 +38,6 @@ class UserRoleController extends Controller
         $modelHasRoleId = DB::table('model_has_roles')
             ->where('model_id', 'LIKE', '%'.$user->id.'%')
             ->value('role_id');
-
-        var_dump($request->role);
 
         switch ($request->role)
         {

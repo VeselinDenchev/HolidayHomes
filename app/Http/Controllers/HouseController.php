@@ -15,28 +15,17 @@ class HouseController extends Controller
 {
     public function index()
     {
-        if (Auth::check())
-        {
-            $user = auth()->user();
-            $hasAnyRole = ($user->hasRole('admin') || ($user->hasRole('editor')));
-
-            if (!$hasAnyRole)
-            {
-                $user->assignRole('editor');
-            }
-        }
-
+        $user = auth()->user();
 
        $houses = DB::table('houses')
-            ->join('populated_places', 'houses.populated_place_id', '=', 'populated_places.id')
-            ->join('object_types', 'houses.object_type_id', '=', 'object_types.id')
-            /*->join('images', 'houses.id', '=', 'images.house_id')*/
-            ->select('houses.id', 'houses.house_name', 'populated_places.populated_place_name',
-                'object_types.object_type_name') //, 'images.url'
-            ->get();
-       var_dump($houses);
+                    ->join('populated_places', 'houses.populated_place_id', '=', 'populated_places.id')
+                    ->join('object_types', 'houses.object_type_id', '=', 'object_types.id')
+                    ->select('houses.id', 'houses.house_name', 'populated_places.populated_place_name',
+                        'object_types.object_type_name')
+                    ->where('houses.user_id', 'LIKE', '%'.$user->id.'%')
+                    ->get();
 
-        return view('houses_list', compact('houses'));
+        return view('my_houses_list', compact('houses'));
     }
 
     public function add()
@@ -119,7 +108,6 @@ class HouseController extends Controller
             $house->count_of_rooms = $request->count_of_rooms;
             $house->count_of_beds = $request->count_of_beds;
 
-            var_dump($request->hasfile('image'));
             if($request->hasfile('image'))
             {
                 $this->deleteImage($imageFileName);
@@ -130,6 +118,46 @@ class HouseController extends Controller
 
             return redirect()->back()->with('status', 'House image added succesfully');
         }
+    }
+
+    public function allHouses()
+    {
+        if (Auth::check())
+        {
+            $user = auth()->user();
+            $hasAnyRole = ($user->hasRole('admin') || ($user->hasRole('editor')));
+
+            if (!$hasAnyRole)
+            {
+                $user->assignRole('editor');
+            }
+        }
+
+        $houses = DB::table('houses')
+            ->join('populated_places', 'houses.populated_place_id', '=', 'populated_places.id')
+            ->join('object_types', 'houses.object_type_id', '=', 'object_types.id')
+            ->join('images', 'houses.id', '=', 'images.house_id')
+            ->select('houses.id', 'houses.house_name', 'populated_places.populated_place_name',
+                'object_types.object_type_name', 'houses.description', 'houses.count_of_rooms', 'houses.count_of_beds',
+                'images.url')
+            ->get();
+
+        return view('all_houses', compact('houses'));
+    }
+
+    public function details(House $house)
+    {
+        $detailedHouse = DB::table('houses')
+            ->where('houses.id', 'LIKE', '%'.$house->id.'%')
+            ->join('populated_places', 'houses.populated_place_id', '=', 'populated_places.id')
+            ->join('object_types', 'houses.object_type_id', '=', 'object_types.id')
+            ->join('images', 'houses.id', '=', 'images.house_id')
+            ->select('houses.id', 'houses.house_name', 'populated_places.populated_place_name',
+                'object_types.object_type_name', 'houses.description', 'houses.count_of_rooms', 'houses.count_of_beds',
+                'images.url')
+            ->first();
+
+        return view('house_details', compact('detailedHouse'));
     }
 
     private function uploadImage(Request $request, string $houseId)
