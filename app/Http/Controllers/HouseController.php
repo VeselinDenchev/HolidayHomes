@@ -7,14 +7,26 @@ use App\Models\Image;
 use App\Models\ObjectType;
 use App\Models\PopulatedPlace;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class HouseController extends Controller
 {
     public function index()
     {
+        if (Auth::check())
+        {
+            $user = auth()->user();
+            $hasAnyRole = ($user->hasRole('admin') || ($user->hasRole('editor')));
+
+            if (!$hasAnyRole)
+            {
+                $user->assignRole('editor');
+            }
+        }
+
+
        $houses = DB::table('houses')
             ->join('populated_places', 'houses.populated_place_id', '=', 'populated_places.id')
             ->join('object_types', 'houses.object_type_id', '=', 'object_types.id')

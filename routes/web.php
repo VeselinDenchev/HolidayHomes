@@ -18,11 +18,6 @@ use App\Http\Controllers\UserRoleController;
 */
 
 Route::get('/', function () {
-    if (auth()->user())
-    {
-        auth()->user()->assignRole('editor');
-    }
-
     return view('welcome');
 });
 
@@ -56,6 +51,6 @@ Route::post('/house/{house}', [HouseController::class, 'update']);
 
 // Roles start
 Route::get('/users', [UserRoleController::class, 'index'])->name('roles');
-Route::get('/user/{house}', [UserRoleController::class, 'edit']);
-Route::post('/user/{house}', [UserRoleController::class, 'update']);
+Route::get('/user/{user}', [UserRoleController::class, 'edit']);
+Route::post('/user/{user}', [UserRoleController::class, 'update']);
 // Roles end
