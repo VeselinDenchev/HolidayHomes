@@ -18,7 +18,7 @@ class CreateHousesTable extends Migration
             $table->string('house_name');
             $table->integer('populated_place_id')->unsigned()->index();
             $table->integer('object_type_id')->unsigned()->index();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->integer('count_of_rooms');
             $table->integer('count_of_beds');
             $table->integer('user_id')->unsigned()->index();

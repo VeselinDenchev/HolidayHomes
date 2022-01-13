@@ -59,12 +59,14 @@ class HouseController extends Controller
 
         $this->uploadImage($request, $house->id);
 
-        return redirect('/houses');
+        return redirect('/my_houses');
     }
 
     public function edit(House $house)
     {
-        $populatedPlaces = DB::table('populated_places')->get();
+        $populatedPlaces = DB::table('populated_places')
+                                ->orderBy('populated_place_name')
+                                ->get();
         $objectTypes = DB::table('object_types')->get();
         $imageUrl = DB::table('images')
             ->where('house_id','LIKE','%'.$house->id.'%')
