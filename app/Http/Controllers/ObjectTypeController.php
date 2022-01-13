@@ -24,7 +24,7 @@ class ObjectTypeController extends Controller
             'description' => 'required'
         ]);
         $objectType = new ObjectType();
-        $objectType->name = $request->description;
+        $objectType->object_type_name = $request->description;
         $objectType->save();
         return redirect('/object_types');
     }

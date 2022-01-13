@@ -24,7 +24,7 @@ class PopulatedPlaceController extends Controller
             'description' => 'required'
         ]);
         $place = new PopulatedPlace();
-        $place->name = $request->description;
+        $place->populated_place_name = $request->description;
         $place->save();
         return redirect('/populated_places');
     }
