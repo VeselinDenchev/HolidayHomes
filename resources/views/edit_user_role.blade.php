@@ -12,6 +12,11 @@
                         <label for="role" style="margin-right: 1em">Role</label>
                         <select id="roles" name="role">
                             @foreach($roles as $role)
+                                @if($role->roleName == $currentUserRole)
+                                    <option value="{{$role->roleName}}" selected>{{$role->roleName}}</option>
+                                @else
+                                    <option value="{{$role->roleName}}">{{$role->roleName}}</option>
+                                @endif
                                 <option value="{{$role->roleName}}">{{$role->roleName}}</option>
                             @endforeach
                         </select>

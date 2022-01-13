@@ -70,7 +70,13 @@ class HouseController extends Controller
             ->where('house_id','LIKE','%'.$house->id.'%')
             ->value('url');
 
-        return view('edit_house', compact('house', 'populatedPlaces', 'objectTypes', 'imageUrl'));
+        $housePopulatedPlace = PopulatedPlace::where('id', 'LIKE', '%'.$house->populated_place_id.'%')
+                                                    ->value('populated_place_name');
+        $houseObjectType = ObjectType::where('id', 'LIKE', '%'.$house->object_type_id.'%')
+                                        ->value('object_type_name');
+
+        return view('edit_house',
+                    compact('house', 'populatedPlaces', 'objectTypes', 'imageUrl', 'housePopulatedPlace', 'houseObjectType' ));
     }
 
     public function update(Request $request, House $house)
@@ -94,7 +100,7 @@ class HouseController extends Controller
                 'description' => 'required',
                 'count_of_rooms' => 'numeric|min:1|max:30',
                 'count_of_beds' => 'numeric|min:1|max:50',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
             $house->house_name = $request->house_name;
@@ -116,7 +122,7 @@ class HouseController extends Controller
 
             $house->update();
 
-            return redirect()->back()->with('status', 'House image added succesfully');
+            return redirect()->back()->with('status', 'House updated succesfully');
         }
     }
 

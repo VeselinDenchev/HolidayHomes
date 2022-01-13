@@ -21,12 +21,16 @@ class UserRoleController extends Controller
 
     public function edit(User $user)
     {
-        $roles = DB::table('roles')
+        $currentUserRole = DB::table('roles')
                 ->join('model_has_roles', 'model_has_roles.role_id', '=', 'roles.id')
-                ->select('roles.id', 'roles.name as roleName', 'model_has_roles.role_id')
-                ->get();
+                ->where('model_id', 'LIKE', '%'.$user->id.'%')
+                ->value('roles.name');
 
-        return view('edit_user_role', compact('user', 'roles'));
+        $roles = DB::table('roles')
+                    ->select('name as roleName')
+                    ->get();
+
+        return view('edit_user_role', compact('user', 'currentUserRole', 'roles'));
     }
 
     public function update(Request $request, User $user)
