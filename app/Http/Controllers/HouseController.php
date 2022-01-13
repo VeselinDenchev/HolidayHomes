@@ -89,7 +89,7 @@ class HouseController extends Controller
             $house->delete();
 
             $this->deleteImage($imageFileName);
-            return redirect('/houses');
+            return redirect('/my_houses');
         }
         else
         {
