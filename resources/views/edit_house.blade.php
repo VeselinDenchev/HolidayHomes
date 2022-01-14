@@ -45,7 +45,7 @@
                                     @if($type->object_type_name == $houseObjectType)
                                         <option value="{{$type->object_type_name}}" selected>{{$type->object_type_name}}</option>
                                     @else
-                                        <option value="{{$type->object_type_name}}">{{$houseObjectType}}</option>
+                                        <option value="{{$type->object_type_name}}">{{$type->object_type_name}}</option>
                                     @endif
                                 @endforeach
                             </select>
