@@ -25,10 +25,6 @@ Route::get('/index', function () {
    return view('index');
 })->name('index');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
 // Populated places start
 Route::get('/populated_places', [PopulatedPlaceController::class, 'index'])->name('populated_places');
 Route::get('/populated_place',[PopulatedPlaceController::class, 'add']);
