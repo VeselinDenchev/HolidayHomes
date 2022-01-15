@@ -173,7 +173,7 @@ class HouseController extends Controller
         return view('house_details', compact('detailedHouse'));
     }
 
-    private function uploadImage(Request $request, string $houseId)
+    private function uploadImage(Request $request, $houseId)
     {
         $imageName = time().'.'.$request->image->extension();
 
@@ -195,7 +195,5 @@ class HouseController extends Controller
         $deletedImage = DB::table('images')
             ->where('file_name', 'LIKE', '%'.$imageFileName.'%')
             ->delete();
-
-        return redirect('/houses');
     }
 }
