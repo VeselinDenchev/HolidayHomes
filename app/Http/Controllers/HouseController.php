@@ -15,7 +15,7 @@ class HouseController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
+       $user = auth()->user();
 
        $houses = DB::table('houses')
                     ->join('populated_places', 'houses.populated_place_id', '=', 'populated_places.id')
@@ -39,8 +39,13 @@ class HouseController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
+            'house_name' => 'required',
+            'populated_place' => 'required',
+            'object_type' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'count_of_rooms' => 'numeric|min:1|max:30',
+            'count_of_beds' => 'numeric|min:1|max:50',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $house = new House();
         $house->house_name = $request->house_name;
