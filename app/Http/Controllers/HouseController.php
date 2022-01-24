@@ -30,7 +30,10 @@ class HouseController extends Controller
 
     public function add()
     {
-        $populatedPlaces = DB::table('populated_places')->get();
+        $populatedPlaces = DB::table('populated_places')
+                            ->orderBy('populated_place_name')
+                            ->get();
+
         $objectTypes = DB::table('object_types')->get();
 
         return view('add_house', compact('populatedPlaces', 'objectTypes'));
