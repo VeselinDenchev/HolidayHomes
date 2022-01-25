@@ -17,7 +17,6 @@
                                 @else
                                     <option value="{{$role->roleName}}">{{$role->roleName}}</option>
                                 @endif
-                                <option value="{{$role->roleName}}">{{$role->roleName}}</option>
                             @endforeach
                         </select>
                         </input>
