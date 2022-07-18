@@ -1,3 +1,23 @@
 # HolidayHomes
+Laravel PHP University Course Project\
 
-&nbsp;&nbsp;&nbsp;&nbsp;Темата на проектът е "Система за къщи за почивка". Той е реализиран на Laravel 8.77.1. Всички къщи, качени в сайта, са видими, както за регистрирани, така и за нерегистрирани потребители. Потребителите в проекта могат да имат една от двете роли: "admin" или "editor". "Admin"-ът може да създава и редактира два от основните обекти на системата: населените места и типовете обекти, както и да сменя ролите на потребителите. "Editor"-ът може да публикува и редактира свои къщи, които ще добави/е добавил в сайта. Всеки регистриран потребител автоматично получавя роля "editor". Сайтът поддържа всички CRUD операции за основните обекти - населени места, типове обекти и къщи. Проектът съдържа всички миграции и сийд, който съдържа данни за населените места и типовете обекти.
+&nbsp;&nbsp;&nbsp;&nbsp;**HolidayHomes** is a system for managing holiday homes. It is developed with Laravel 8.77.1 PHP framework. The application consists of the following models:
+- House\
+&nbsp;&nbsp;&nbsp;&nbsp;Every house has a name, populated place, object type, descriotion, count of rooms, count of beds and image. Houses are visible for both authenticated and non-authenticated users.
+- Image\
+&nbsp;&nbsp;&nbsp;&nbsp;Every image is getting uploaded to the *\public\images* folder and whenever an info for a certain house is requested it gets loaded in the corresponding view.
+- Object type\
+&nbsp;&nbsp;&nbsp;&nbsp;Every object type has its name.
+- Populated place\
+&nbsp;&nbsp;&nbsp;&nbsp;Every populated place has its name.
+- User\
+&nbsp;&nbsp;&nbsp;&nbsp;Every user has a username, email, password and role. Every user can have one of the following roles:
+    - Admin\
+        &nbsp;&nbsp;&nbsp;&nbsp;Admins can make CRUD operations over populated places and object types and change users' roles.
+    - Editor\
+        &nbsp;&nbsp;&nbsp;&nbsp;Editors can publish and edit his houses. Every registered user automatically gets the *editor* role.
+        </ul>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For the the role creation I have used the *Spatie* package.
+</br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;The application has the respective migrations for creating models' tables in the database. There is also a seed that contains data about populated places and object types which can be found in *\database\seeders\InitialSeeder.php*.
