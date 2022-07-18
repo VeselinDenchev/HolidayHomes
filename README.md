@@ -1,5 +1,5 @@
 # HolidayHomes
-Laravel PHP University Course Project\
+Laravel PHP University Course Project
 
 &nbsp;&nbsp;&nbsp;&nbsp;**HolidayHomes** is a system for managing holiday homes. It is developed with Laravel 8.77.1 PHP framework. The application consists of the following models:
 - House\
